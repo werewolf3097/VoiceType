@@ -1,0 +1,34 @@
+name: VoiceType
+options:
+  bundleIdPrefix: com.farrukh
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+targets:
+  VoiceType:
+    type: application
+    platform: macOS
+    sources:
+      - path: VoiceType/Sources
+    info:
+      path: VoiceType/Resources/Info.plist
+      properties:
+        NSMicrophoneUsageDescription: "VoiceType записывает голос, чтобы превратить его в текст."
+        LSUIElement: false
+        CFBundleShortVersionString: "0.1.0"
+        CFBundleVersion: "1"
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.farrukh.voicetype
+        SWIFT_VERSION: "5.0"
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_HARDENED_RUNTIME: false
+        MACOSX_DEPLOYMENT_TARGET: "14.0"
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+schemes:
+  VoiceType:
+    build:
+      targets:
+        VoiceType: all
+    run:
+      config: Debug
