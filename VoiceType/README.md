@@ -75,13 +75,18 @@ xcodebuild -project VoiceType.xcodeproj -scheme VoiceType -configuration Debug b
 **Важно про gapi:** сервис распознаёт только узбекскую речь (результат — латиницей). Для
 русского/английского ввода понадобится другой STT-движок — если такое нужно, это отдельная задача.
 
-## Дальше
+## Другие платформы
 
-- **iOS**: тот же принцип транскрибации, но системную вставку текста придётся делать через
-  Custom Keyboard Extension (Apple не даёт клавиатуре доступ к микрофону — запись выполняется
-  в основном приложении, а расшифрованный текст показывается клавиатуре через App Group).
-- **Android**: Accessibility Service + собственный IME — там можно вставлять текст в любое поле
-  напрямую, без ограничений iOS.
+VoiceType также разрабатывается под iOS, Android и Windows — каждая платформа в своём
+репозитории, scaffolding уже создан:
 
-Оба — заметно больше по объёму работы, чем macOS-MVP, и по-хорошему стартуют отдельными
-сессиями/задачами, когда macOS-версия обкатана.
+- [voicetype-ios](https://github.com/werewolf3097/voicetype-ios) — Custom Keyboard Extension
+  (Apple не даёт клавиатуре доступ к микрофону — запись выполняется в основном приложении,
+  а расшифрованный текст передаётся клавиатуре через App Group).
+- [voicetype-android](https://github.com/werewolf3097/voicetype-android) — Accessibility
+  Service + собственный IME, вставка текста в любое поле напрямую.
+- [voicetype-windows](https://github.com/werewolf3097/voicetype-windows) — WinUI 3, глобальный
+  хоткей через low-level keyboard hook, вставка через `SendInput`.
+
+Общий поток данных и контракты внешних API — в
+[voicetype-docs](https://github.com/werewolf3097/voicetype-docs).

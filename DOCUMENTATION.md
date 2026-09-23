@@ -3,7 +3,22 @@
 Голосовой ввод для macOS: зажал клавишу, сказал, отпустил — текст расшифрован и вставлен
 в активное поле. Работает поверх любого приложения через глобальный хоткей.
 
-Статус: **рабочий MVP под macOS**. iOS и Android не начаты (см. «Дорожная карта»).
+Статус: **рабочий MVP под macOS**. iOS, Android и Windows — scaffolding в отдельных
+репозиториях, реализация не начата (см. «Дорожная карта»).
+
+## 0. Экосистема VoiceType
+
+Этот репозиторий — реализация под macOS. Остальные платформы живут в своих репозиториях;
+общее (поток данных, контракты внешних API, сравнение платформенных ограничений) —
+в [voicetype-docs](https://github.com/werewolf3097/voicetype-docs).
+
+| Репозиторий | Платформа | Статус |
+|---|---|---|
+| VoiceType (этот репозиторий) | macOS | ✅ рабочий MVP |
+| [voicetype-ios](https://github.com/werewolf3097/voicetype-ios) | iOS | 🚧 scaffolding |
+| [voicetype-android](https://github.com/werewolf3097/voicetype-android) | Android | 🚧 scaffolding |
+| [voicetype-windows](https://github.com/werewolf3097/voicetype-windows) | Windows | 🚧 scaffolding |
+| [voicetype-docs](https://github.com/werewolf3097/voicetype-docs) | — | общая документация |
 
 ---
 
@@ -226,13 +241,23 @@ AppKit-меню вне SwiftUI-иерархии, `\.openSettings` там нед�
 
 ## 10. Дорожная карта
 
-- **macOS**: настраиваемый захват произвольной клавиши/комбинации, кнопка проверки ключей,
-  звук/анимация при начале и конце записи, поиск по истории.
-- **iOS**: тот же поток распознавания, но системная вставка текста — только через
-  Custom Keyboard Extension (Apple не даёт клавиатуре доступ к микрофону напрямую: запись
-  идёт в основном приложении, готовый текст передаётся клавиатуре через App Group).
-- **Android**: Accessibility Service + собственный IME — здесь ограничений меньше, текст
-  можно вставлять в любое поле напрямую, включая доступ к микрофону из сервиса.
+Актуальный статус по всем платформам и планы — в
+[voicetype-docs/ROADMAP.md](https://github.com/werewolf3097/voicetype-docs/blob/main/ROADMAP.md).
+Коротко:
 
-Оба мобильных направления — по объёму сравнимы с текущим macOS MVP каждое по отдельности;
-стартовать стоит отдельными сессиями, когда macOS-версия обкатана вживую.
+- **macOS** (этот репозиторий): настраиваемый захват произвольной клавиши/комбинации,
+  кнопка проверки ключей, звук/анимация при начале и конце записи, поиск по истории,
+  Developer ID + нотаризация.
+- **iOS** ([voicetype-ios](https://github.com/werewolf3097/voicetype-ios)): тот же поток
+  распознавания, но системная вставка текста — только через Custom Keyboard Extension
+  (Apple не даёт клавиатуре доступ к микрофону напрямую: запись идёт в основном приложении,
+  готовый текст передаётся клавиатуре через App Group). Scaffolding уже создан.
+- **Android** ([voicetype-android](https://github.com/werewolf3097/voicetype-android)):
+  Accessibility Service + собственный IME — здесь ограничений меньше, текст можно вставлять
+  в любое поле напрямую, включая доступ к микрофону из сервиса. Scaffolding уже создан.
+- **Windows** ([voicetype-windows](https://github.com/werewolf3097/voicetype-windows)):
+  WinUI 3, глобальный хоткей через low-level keyboard hook, вставка через `SendInput`,
+  ключи — в Windows Credential Locker. Scaffolding уже создан.
+
+Каждое направление — по объёму сравнимо с текущим macOS MVP по отдельности; реализация
+стартует отдельными сессиями в своём репозитории.
