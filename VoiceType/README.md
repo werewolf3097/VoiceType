@@ -77,16 +77,15 @@ xcodebuild -project VoiceType.xcodeproj -scheme VoiceType -configuration Debug b
 
 ## Другие платформы
 
-VoiceType также разрабатывается под iOS, Android и Windows — каждая платформа в своём
-репозитории, scaffolding уже создан:
+Фокус сейчас — только desktop:
 
-- [voicetype-ios](https://github.com/werewolf3097/voicetype-ios) — Custom Keyboard Extension
-  (Apple не даёт клавиатуре доступ к микрофону — запись выполняется в основном приложении,
-  а расшифрованный текст передаётся клавиатуре через App Group).
-- [voicetype-android](https://github.com/werewolf3097/voicetype-android) — Accessibility
-  Service + собственный IME, вставка текста в любое поле напрямую.
 - [voicetype-windows](https://github.com/werewolf3097/voicetype-windows) — WinUI 3, глобальный
   хоткей через low-level keyboard hook, вставка через `SendInput`.
+
+iOS и Android сознательно отложены до проверки продукта на desktop — вернёмся к ним, если
+продукт получится хорошим. Прежние scaffolding-репозитории удалены; архитектурные решения
+сохранены в
+[voicetype-docs/PLATFORM_MATRIX.md](https://github.com/werewolf3097/voicetype-docs/blob/main/PLATFORM_MATRIX.md).
 
 Общий поток данных и контракты внешних API — в
 [voicetype-docs](https://github.com/werewolf3097/voicetype-docs).
