@@ -3,22 +3,23 @@
 Голосовой ввод для macOS: зажал клавишу, сказал, отпустил — текст расшифрован и вставлен
 в активное поле. Работает поверх любого приложения через глобальный хоткей.
 
-Статус: **рабочий MVP под macOS**. iOS, Android и Windows — scaffolding в отдельных
-репозиториях, реализация не начата (см. «Дорожная карта»).
+Статус: **рабочий MVP под macOS**. Windows — scaffolding в отдельном репозитории, реализация
+не начата. iOS и Android сознательно отложены до проверки продукта на desktop (см.
+«Дорожная карта»).
 
 ## 0. Экосистема VoiceType
 
-Этот репозиторий — реализация под macOS. Остальные платформы живут в своих репозиториях;
-общее (поток данных, контракты внешних API, сравнение платформенных ограничений) —
-в [voicetype-docs](https://github.com/werewolf3097/voicetype-docs).
+Этот репозиторий — реализация под macOS. Сейчас в работе только desktop-платформы
+(macOS + Windows); мобильные отложены до проверки продукта. Общее (поток данных, контракты
+внешних API, сравнение платформенных ограничений) — в
+[voicetype-docs](https://github.com/werewolf3097/voicetype-docs).
 
 | Репозиторий | Платформа | Статус |
 |---|---|---|
 | VoiceType (этот репозиторий) | macOS | ✅ рабочий MVP |
-| [voicetype-ios](https://github.com/werewolf3097/voicetype-ios) | iOS | 🚧 scaffolding |
-| [voicetype-android](https://github.com/werewolf3097/voicetype-android) | Android | 🚧 scaffolding |
 | [voicetype-windows](https://github.com/werewolf3097/voicetype-windows) | Windows | 🚧 scaffolding |
 | [voicetype-docs](https://github.com/werewolf3097/voicetype-docs) | — | общая документация |
+| iOS, Android | — | ⏸ отложено до проверки продукта на desktop |
 
 ---
 
@@ -248,16 +249,16 @@ AppKit-меню вне SwiftUI-иерархии, `\.openSettings` там нед�
 - **macOS** (этот репозиторий): настраиваемый захват произвольной клавиши/комбинации,
   кнопка проверки ключей, звук/анимация при начале и конце записи, поиск по истории,
   Developer ID + нотаризация.
-- **iOS** ([voicetype-ios](https://github.com/werewolf3097/voicetype-ios)): тот же поток
-  распознавания, но системная вставка текста — только через Custom Keyboard Extension
-  (Apple не даёт клавиатуре доступ к микрофону напрямую: запись идёт в основном приложении,
-  готовый текст передаётся клавиатуре через App Group). Scaffolding уже создан.
-- **Android** ([voicetype-android](https://github.com/werewolf3097/voicetype-android)):
-  Accessibility Service + собственный IME — здесь ограничений меньше, текст можно вставлять
-  в любое поле напрямую, включая доступ к микрофону из сервиса. Scaffolding уже создан.
 - **Windows** ([voicetype-windows](https://github.com/werewolf3097/voicetype-windows)):
   WinUI 3, глобальный хоткей через low-level keyboard hook, вставка через `SendInput`,
   ключи — в Windows Credential Locker. Scaffolding уже создан.
 
-Каждое направление — по объёму сравнимо с текущим macOS MVP по отдельности; реализация
-стартует отдельными сессиями в своём репозитории.
+**iOS и Android отложены.** Решение — сфокусироваться на desktop (macOS + Windows) на
+старте, вернуться к мобильным платформам только если продукт покажет себя хорошо. Прежние
+репозитории со scaffolding удалены; архитектурные решения (Custom Keyboard Extension +
+App Group на iOS, Accessibility Service + собственный IME на Android) сохранены в
+[voicetype-docs/PLATFORM_MATRIX.md](https://github.com/werewolf3097/voicetype-docs/blob/main/PLATFORM_MATRIX.md)
+как справочный материал на будущее.
+
+Windows — по объёму сравним с текущим macOS MVP; реализация стартует отдельной сессией в
+своём репозитории.
